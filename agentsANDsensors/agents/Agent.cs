@@ -3,42 +3,67 @@ namespace agentsANDsensors;
 public abstract class Agent
 {
     public GameEnums.AgentEnum AgentType;
-    public int weaknessesNum { get;}
-    public int discoveredWeaknesses{get;set;}
-    public GameEnums.SensorEnum[] agentWeaknesses;
+    public int senssorsNum { get;}
     public Sensor[] agentSensors;
 
     public Agent(GameEnums.AgentEnum agentType)
     {
-        discoveredWeaknesses = 0;
-        weaknessesNum = (int)(agentType);
-        agentSensors = new Sensor[weaknessesNum];
-        agentWeaknesses = new GameEnums.SensorEnum[weaknessesNum]; //create the weakness arr in the size of the agent rank
-        createAgentWeakness();//fill it with randomly sensors
+        senssorsNum = (int)(agentType);
+        agentSensors = new Sensor[senssorsNum];
+        createSensors();//fill it with randomly sensors
     }
 
-    public void createAgentWeakness()
+    public void createSensors()
     {
         var allSensors = GameEnums.getSensors();
         Random rnd = new Random();
-        for(int i = 0; i < agentWeaknesses.Length; i++)
+        for(int i = 0; i < senssorsNum; i++)
         {
             int sns_rnd  = rnd.Next(0, allSensors.Length);
-            agentWeaknesses[i] = allSensors[sns_rnd];
+            Sensor newSens = SensorFactory.CreateSensor(allSensors[sns_rnd]);
+            agentSensors[i] = newSens;
         }
     }
 
-    public void printAgentWeakness()
+    public void printAgentSensors()
     {
-        foreach (var sensor in agentWeaknesses)
+        foreach (var sensor in agentSensors)
         {
-            Console.WriteLine(sensor);
+            Console.WriteLine(sensor.ToString());
         }
     }
 
-    public GameEnums.SensorEnum[] getUnrevealedWeaknesses()
+    public int countActiveSensors()
     {
-        return (GameEnums.SensorEnum[])(agentWeaknesses.Where(weakness => weakness != GameEnums.SensorEnum.NullSensor).ToArray());
+        int count = 0;
+        foreach (var sens in agentSensors)
+        {
+            if (sens.Active)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Sensor[] getUnActiveSensores()
+    {
+        return (Sensor[])(agentSensors.Where(sens => sens.Active == false).ToArray());
+    }
+    
+
+    public void ActivateSensor(GameEnums.SensorEnum sensorType)
+    {
+        foreach (var sens in agentSensors)
+        {
+            if (sens.type == sensorType && sens.Active == false)
+            {
+                sens.Activate(this);
+                sens.Active = true;
+                break;
+            }
+        }
+        
     }
 
     

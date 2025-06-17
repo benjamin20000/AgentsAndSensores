@@ -6,10 +6,10 @@ public class ThermalSensor:Sensor
 
     private void RevealWeaknes(Agent agent)
     {
-        GameEnums.SensorEnum[] UnrevealedWeaknesses = agent.getUnrevealedWeaknesses();
+        Sensor[] sensors = agent.getUnActiveSensores();
         Random rnd = new Random();
-        int rndWeak = rnd.Next(0, UnrevealedWeaknesses.Length);
-        Console.WriteLine($"ThermalSensor revealing weakness {UnrevealedWeaknesses[rndWeak]}");
+        int rndSns = rnd.Next(0, sensors.Length);
+        Console.WriteLine($"ThermalSensor revealing weakness {sensors[rndSns].type}");
     }
 
     public override void Activate(Agent agent)
