@@ -9,17 +9,32 @@ public static class GameEnums
         SeniorCommander = 6,
         OrganizationLeader = 8
     }
-
     public enum SensorEnum
     {
         NullSensor,
         AudioSensor,
         ThermalSensor,
-        // PulseSensor,
+        PulseSensor,
         // MotionSensor,
         // MagneticSensor,
         // SignalSensor,
         // LightSensor
     }
+
+    public static SensorEnum[] getSensors()
+    {
+        SensorEnum[] arr = (SensorEnum[])Enum.GetValues(typeof(SensorEnum));
+        return arr.Where(sensor => sensor != SensorEnum.NullSensor).ToArray();
+    } 
+    
+    public static void printSensors()
+    {
+        SensorEnum[] sensors = getSensors();
+        foreach (var sensor in sensors )
+        {
+            Console.WriteLine(sensor.ToString());
+        }
+    }
+    
     
 }
