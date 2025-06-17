@@ -7,14 +7,22 @@ public class ThermalSensor:Sensor
     private void RevealWeaknes(Agent agent)
     {
         Sensor[] sensors = agent.getUnActiveSensores();
-        Random rnd = new Random();
-        int rndSns = rnd.Next(0, sensors.Length);
-        Console.WriteLine($"ThermalSensor revealing weakness {sensors[rndSns].type}");
+        if (sensors.Length == 0)
+        {
+            Console.WriteLine($"no weakness to reveal");
+        }
+        else
+        {
+            Random rnd = new Random();
+            int rndSns = rnd.Next(0, sensors.Length);
+            Console.WriteLine($"ThermalSensor revealing weakness {sensors[rndSns].type}");
+        }
+       
     }
 
     public override void Activate(Agent agent)
     {
-        base.Activate(agent);
+        Console.WriteLine("ThermalSensor working");
         RevealWeaknes(agent);
     }
 }

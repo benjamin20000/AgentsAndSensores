@@ -3,13 +3,13 @@ namespace agentsANDsensors;
 public abstract class Agent
 {
     public GameEnums.AgentEnum AgentType;
-    public int senssorsNum { get;}
+    public int senssorsLen { get;}
     public Sensor[] agentSensors;
 
     public Agent(GameEnums.AgentEnum agentType)
     {
-        senssorsNum = (int)(agentType);
-        agentSensors = new Sensor[senssorsNum];
+        senssorsLen = (int)(agentType);
+        agentSensors = new Sensor[senssorsLen];
         createSensors();//fill it with randomly sensors
     }
 
@@ -17,7 +17,7 @@ public abstract class Agent
     {
         var allSensors = GameEnums.getSensors();
         Random rnd = new Random();
-        for(int i = 0; i < senssorsNum; i++)
+        for(int i = 0; i < senssorsLen; i++)
         {
             int sns_rnd  = rnd.Next(0, allSensors.Length);
             Sensor newSens = SensorFactory.CreateSensor(allSensors[sns_rnd]);
@@ -38,7 +38,7 @@ public abstract class Agent
         int count = 0;
         foreach (var sens in agentSensors)
         {
-            if (sens.Active)
+            if (sens.active)
             {
                 count++;
             }
@@ -48,22 +48,31 @@ public abstract class Agent
 
     public Sensor[] getUnActiveSensores()
     {
-        return (Sensor[])(agentSensors.Where(sens => sens.Active == false).ToArray());
+        return (Sensor[])(agentSensors.Where(sens => sens.active == false).ToArray());
     }
     
 
-    public void ActivateSensor(GameEnums.SensorEnum sensorType)
+    public void AddSensor(GameEnums.SensorEnum sensorType)
     {
         foreach (var sens in agentSensors)
         {
-            if (sens.type == sensorType && sens.Active == false)
+            if (sens.type == sensorType && sens.active == false)
             {
-                sens.Activate(this);
-                sens.Active = true;
+                sens.active = true;
                 break;
             }
         }
-        
+    }
+
+    public void ActivateSensors()
+    {
+        foreach (var sens in agentSensors)
+        {
+            if (sens.active == true)
+            {
+                sens.Activate(this);
+            }
+        }
     }
 
     
