@@ -1,6 +1,6 @@
 namespace agentsANDsensors;
 
-public class PulseSensor
+public class PulseSensor: Sensor
 {
-    
+    public PulseSensor():base(GameEnums.SensorEnum.PulseSensor){}
 }
