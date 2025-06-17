@@ -11,24 +11,20 @@ class Game
         switch (choseSens)
         {
             case "audiosensor":
-                agent.ActivateSensor(GameEnums.SensorEnum.AudioSensor);
+                agent.AddSensor(GameEnums.SensorEnum.AudioSensor);
                 break;
             case "thermalsensor":
-                agent.ActivateSensor(GameEnums.SensorEnum.ThermalSensor);
+                agent.AddSensor(GameEnums.SensorEnum.ThermalSensor);
                 break;
             case "pulsesensor":
-                foreach (var sens in agent.agentSensors)
-                {
-                    if (sens.type == GameEnums.SensorEnum.PulseSensor && sens.Active == false)
-                    {
-                        sens.Active = true;
-                    }
-                }
+                agent.AddSensor(GameEnums.SensorEnum.PulseSensor);
                 break;
             default:
                 break;
         }
+
         Console.WriteLine($"you discovered {agent.countActiveSensors()}/{agent.agentSensors.Length} of the weaknesses");
+        agent.ActivateSensors();
     }
 
     public void start()

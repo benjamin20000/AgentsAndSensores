@@ -3,16 +3,13 @@ namespace agentsANDsensors;
 public abstract class Sensor
 {
     public GameEnums.SensorEnum type;
-    public bool Active { get; set; }
+    public bool active { get; set; }
+    protected int activationCounter;
 
     protected Sensor(GameEnums.SensorEnum type)
     {
-        this.Active = false;
+        this.active = false;
         this.type = type;
     }
-    public virtual void Activate(Agent agent)
-    {
-        this.Active = true;
-    }
-
+    public abstract void Activate(Agent agent);
 }
