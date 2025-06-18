@@ -97,9 +97,21 @@ public abstract class Agent
             Random rnd = new Random();
             int randomSens = rnd.Next(0, activeSensors.Length);
             activeSensors[randomSens].active = false;
-            Console.WriteLine($"H-H-H-H i remove one of your sensors... {activeSensors[randomSens].type}");
+            Console.WriteLine($"LOL i remove one of your sensors...");
         }
     }
+    protected void RemoveAllSensors()
+    {
+        foreach (var sens in agentSensors)
+        {
+            if (sens.active == true)
+            {
+                sens.active = false;
+            }
+        }
+        Console.WriteLine($"LOL i remove all of sensors...");
+    }
+    
 
     protected virtual void counterAttack(){}
 }
