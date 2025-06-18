@@ -15,5 +15,4 @@ public class PulseSensor: Sensor
             activationCounter = 0;
         }
     }
-    
 }
