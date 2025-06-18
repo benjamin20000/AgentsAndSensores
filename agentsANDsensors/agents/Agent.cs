@@ -6,9 +6,11 @@ public abstract class Agent
     public int senssorsLen { get;}
     public Sensor[] agentSensors;
     protected int turnsCounter;
+    public int cancelCounterAttack;
 
     public Agent(GameEnums.AgentEnum agentType)
     {
+        cancelCounterAttack = 0;
         turnsCounter = 0;
         senssorsLen = (int)(agentType);
         agentSensors = new Sensor[senssorsLen];

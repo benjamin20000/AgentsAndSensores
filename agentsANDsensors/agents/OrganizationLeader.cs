@@ -5,6 +5,11 @@ public class OrganizationLeader:Agent
     public OrganizationLeader():base(GameEnums.AgentEnum.OrganizationLeader){}
     protected override void counterAttack()
     {
+        if (cancelCounterAttack > 0)
+        {
+            cancelCounterAttack--;
+            return;
+        }
         if (base.turnsCounter % 3 == 0)
         {
             base.RemoveRandomSensors(1);

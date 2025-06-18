@@ -27,7 +27,7 @@ class Game
         agent.ActivateSensors();
     }
 
-    public void start(Agent agent)
+    public void startLevel(Agent agent)
     {
         while (agent.countActiveSensors() < agent.agentSensors.Length)
         {
@@ -37,28 +37,28 @@ class Game
 
     private void initGame()
     {
-        Console.WriteLine("Welcome to the game!");
-        Agent footSoldier = new FootSoldier();
-        start(footSoldier);
-        Console.WriteLine("type yes fot continue to the next agent");
-        string decision1 = Console.ReadLine();
-        if (decision1 != "yes")
+        Func<Agent>[] agentFactories = new Func<Agent>[]
         {
-            return;
-        }
-        Agent squadLeader = new SquadLeader();
-        start(squadLeader);
-        Console.WriteLine("type yes fot continue to the next agent");
-        string decision2 = Console.ReadLine();
-        if (decision2 != "yes")
+            () => new FootSoldier(),
+            () => new SquadLeader(),
+            () => new SeniorCommander()
+        };
+        int level = 0;
+        string continueGame = "yes";
+        while (level < agentFactories.Length && continueGame == "yes")
         {
-            return;
+            Agent squadLeader = agentFactories[level]();
+            startLevel(squadLeader);
+            if (level < agentFactories.Length-1)
+            {
+                Console.WriteLine("type yes fot continue to the next agent");
+                continueGame = Console.ReadLine();
+            }
+            level++;
         }
-        Agent seniorCommander = new SeniorCommander();
-        start(seniorCommander);
-        
-        
+        Console.WriteLine("game over");
     }
+    
     public static void Main(string[] args)
     {
         // Agent agent = new FootSoldier();

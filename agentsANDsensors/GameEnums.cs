@@ -14,10 +14,10 @@ public static class GameEnums
         AudioSensor,
         ThermalSensor,
         PulseSensor,
-        // MotionSensor,
-        // MagneticSensor,
-        // SignalSensor,
-        // LightSensor
+        MagneticSensor,
+        MotionSensor,
+        SignalSensor,
+        LightSensor
     }
     public static SensorEnum[] getSensors()
     {

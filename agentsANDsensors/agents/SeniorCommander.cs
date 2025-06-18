@@ -6,6 +6,11 @@ public class SeniorCommander: Agent
 
     protected override void counterAttack()
     {
+        if (cancelCounterAttack > 0)
+        {
+            cancelCounterAttack--;
+            return;
+        }
         if (base.turnsCounter % 3 == 0)
         {
             RemoveRandomSensors(2);

@@ -8,6 +8,11 @@ public class SquadLeader: Agent
 
     protected override void counterAttack()
     {
+        if (cancelCounterAttack > 0)
+        {
+            cancelCounterAttack--;
+            return;
+        }
         if (base.turnsCounter % 3 == 0)
         {
             base.RemoveRandomSensors(1);
