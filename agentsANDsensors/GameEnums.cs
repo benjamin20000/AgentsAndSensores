@@ -11,7 +11,6 @@ public static class GameEnums
     }
     public enum SensorEnum
     {
-        NullSensor,
         AudioSensor,
         ThermalSensor,
         PulseSensor,
@@ -20,11 +19,10 @@ public static class GameEnums
         // SignalSensor,
         // LightSensor
     }
-
     public static SensorEnum[] getSensors()
     {
         SensorEnum[] arr = (SensorEnum[])Enum.GetValues(typeof(SensorEnum));
-        return arr.Where(sensor => sensor != SensorEnum.NullSensor).ToArray();
+        return arr;
     } 
     
     public static void printSensors()
@@ -35,6 +33,4 @@ public static class GameEnums
             Console.WriteLine(sensor.ToString());
         }
     }
-    
-    
 }

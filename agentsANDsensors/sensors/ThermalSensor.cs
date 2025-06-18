@@ -6,7 +6,7 @@ public class ThermalSensor:Sensor
 
     private void RevealWeaknes(Agent agent)
     {
-        Sensor[] sensors = agent.getUnActiveSensores();
+        Sensor[] sensors = agent.getUnActiveSensors();
         if (sensors.Length == 0)
         {
             Console.WriteLine($"no weakness to reveal");
@@ -22,7 +22,7 @@ public class ThermalSensor:Sensor
 
     public override void Activate(Agent agent)
     {
-        Console.WriteLine("ThermalSensor working");
+        base.Activate(agent);
         RevealWeaknes(agent);
     }
 }

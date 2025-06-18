@@ -6,6 +6,7 @@ public class PulseSensor: Sensor
 
     public override void Activate(Agent agent)
     {
+        base.Activate(agent);
         base.activationCounter++;
         if (base.activationCounter == 3)
         {

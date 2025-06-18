@@ -11,5 +11,9 @@ public abstract class Sensor
         this.active = false;
         this.type = type;
     }
-    public abstract void Activate(Agent agent);
+
+    public virtual void Activate(Agent agent)
+    {
+        Console.WriteLine($"{this.type} working...");
+    }
 }
