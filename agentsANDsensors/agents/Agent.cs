@@ -5,15 +5,17 @@ public abstract class Agent
     public GameEnums.AgentEnum AgentType;
     public int senssorsLen { get;}
     public Sensor[] agentSensors;
+    protected int turnsCounter;
 
     public Agent(GameEnums.AgentEnum agentType)
     {
+        turnsCounter = 0;
         senssorsLen = (int)(agentType);
         agentSensors = new Sensor[senssorsLen];
         createSensors();//fill it with randomly sensors
     }
 
-    public void createSensors()
+    private void createSensors()
     {
         var allSensors = GameEnums.getSensors();
         Random rnd = new Random();
@@ -46,10 +48,15 @@ public abstract class Agent
         return count;
     }
 
-    public Sensor[] getUnActiveSensores()
+    public Sensor[] getUnActiveSensors()
     {
         return (Sensor[])(agentSensors.Where(sens => sens.active == false).ToArray());
     }
+    public Sensor[] getActiveSensors()
+    {
+        return (Sensor[])(agentSensors.Where(sens => sens.active == true).ToArray());
+    }
+
     
 
     public void AddSensor(GameEnums.SensorEnum sensorType)
@@ -64,7 +71,7 @@ public abstract class Agent
         }
     }
 
-    public void ActivateSensors()
+    public virtual void ActivateSensors()
     {
         foreach (var sens in agentSensors)
         {
@@ -73,7 +80,8 @@ public abstract class Agent
                 sens.Activate(this);
             }
         }
+        turnsCounter++;
     }
 
-    
+    protected virtual void counterAttack(){}
 }

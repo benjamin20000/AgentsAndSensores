@@ -3,7 +3,7 @@ using agentsANDsensors;
 
 class Game
 {
-    private void playMenu(Agent agent)
+    private void play(Agent agent)
     {
         Console.WriteLine("chose a sensor:");
         GameEnums.printSensors();
@@ -27,19 +27,34 @@ class Game
         agent.ActivateSensors();
     }
 
-    public void start()
+    public void start(Agent agent)
     {
-        Console.WriteLine("Welcome to my game!");
-        Agent footSoldier = new FootSoldier();
-        while (footSoldier.countActiveSensors() < footSoldier.agentSensors.Length)
+        while (agent.countActiveSensors() < agent.agentSensors.Length)
         {
-            playMenu(footSoldier);
+            play(agent);
         }
+    }
+
+    private void initGame()
+    {
+        Console.WriteLine("Welcome to the game!");
+        Agent footSoldier = new FootSoldier();
+        start(footSoldier);
+        Console.WriteLine("type yes fot continue to the next agent");
+        string decision = Console.ReadLine();
+        if (decision != "yes")
+        {
+            return;
+        }
+        Agent squadLeader = new SquadLeader();
+        start(squadLeader);
+        
+        
     }
     public static void Main(string[] args)
     {
         // Agent agent = new FootSoldier();
         Game game = new Game();
-        game.start();
+        game.initGame();
     }
 }
