@@ -10,6 +10,7 @@ public class PulseSensor: Sensor
         base.activationCounter++;
         if (base.activationCounter == 3)
         {
+            Console.WriteLine($"{this.type}: too much work for me i am broke now....");
             this.active = false;
             activationCounter = 0;
         }

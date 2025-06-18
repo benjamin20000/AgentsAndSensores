@@ -12,7 +12,7 @@ public abstract class Agent
         turnsCounter = 0;
         senssorsLen = (int)(agentType);
         agentSensors = new Sensor[senssorsLen];
-        createSensors();//fill it with randomly sensors
+        createSensors(); //fill it with randomly sensors
     }
 
     private void createSensors()
@@ -27,11 +27,11 @@ public abstract class Agent
         }
     }
 
-    public void printAgentSensors()
+    private void printAgentSensors()
     {
         foreach (var sensor in agentSensors)
         {
-            Console.WriteLine(sensor.ToString());
+            Console.WriteLine($"{sensor.type} {sensor.active}");
         }
     }
 
@@ -51,10 +51,11 @@ public abstract class Agent
     public Sensor[] getUnActiveSensors()
     {
         return (Sensor[])(agentSensors.Where(sens => sens.active == false).ToArray());
+
     }
-    public Sensor[] getActiveSensors()
+    protected Sensor[] getActiveSensors()
     {
-        return (Sensor[])(agentSensors.Where(sens => sens.active == true).ToArray());
+        return (Sensor[])(agentSensors.Where(sens => sens.active).ToArray());
     }
 
     
