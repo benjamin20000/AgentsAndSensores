@@ -8,24 +8,15 @@ public class SquadLeader: Agent
 
     protected override void counterAttack()
     {
-        Sensor[] activeSensors  = getActiveSensors();
-        if (activeSensors.Length == 0)
+        if (base.turnsCounter % 3 == 0)
         {
-            Console.WriteLine("No active sensors for counter attack...");
-            return;
+            base.RemoveRandomSensors(1);
         }
-        Random rnd = new Random();
-        int randomSens = rnd.Next(0, activeSensors.Length);
-        activeSensors[randomSens].active = false;
-        Console.WriteLine($"H-H-H-H i remove one of your sensors... {activeSensors[randomSens].type}");
     }
 
     public override void ActivateSensors()
     {
         base.ActivateSensors();
-        if (base.turnsCounter % 3 == 0)
-        {
-            counterAttack();
-        }
+        counterAttack();
     }
 }
