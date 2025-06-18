@@ -16,9 +16,7 @@ public class SquadLeader: Agent
         }
         Random rnd = new Random();
         int randomSens = rnd.Next(0, activeSensors.Length);
-        Console.WriteLine(activeSensors[randomSens].active);
         activeSensors[randomSens].active = false;
-        Console.WriteLine(activeSensors[randomSens].active);
         Console.WriteLine($"H-H-H-H i remove one of your sensors... {activeSensors[randomSens].type}");
     }
 
