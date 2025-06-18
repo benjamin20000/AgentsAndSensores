@@ -1,16 +1,14 @@
-using System.Collections.Concurrent;
-
 namespace agentsANDsensors;
 
-public class SquadLeader: Agent
+public class SeniorCommander: Agent
 {
-    public SquadLeader(): base(GameEnums.AgentEnum.SquadLeader){}
+    public SeniorCommander(): base(GameEnums.AgentEnum.SeniorCommander){}
 
     protected override void counterAttack()
     {
         if (base.turnsCounter % 3 == 0)
         {
-            base.RemoveRandomSensors(1);
+            RemoveRandomSensors(2);
         }
     }
 

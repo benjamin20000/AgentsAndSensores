@@ -84,5 +84,22 @@ public abstract class Agent
         turnsCounter++;
     }
 
+    protected void RemoveRandomSensors(int iter = 1)
+    {
+        for(int i = 0; i < iter; i++)
+        {
+            Sensor[] activeSensors  = getActiveSensors();
+            if (activeSensors.Length == 0)
+            {
+                Console.WriteLine("No active sensors for counter attack...");
+                return;
+            }
+            Random rnd = new Random();
+            int randomSens = rnd.Next(0, activeSensors.Length);
+            activeSensors[randomSens].active = false;
+            Console.WriteLine($"H-H-H-H i remove one of your sensors... {activeSensors[randomSens].type}");
+        }
+    }
+
     protected virtual void counterAttack(){}
 }

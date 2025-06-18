@@ -41,13 +41,21 @@ class Game
         Agent footSoldier = new FootSoldier();
         start(footSoldier);
         Console.WriteLine("type yes fot continue to the next agent");
-        string decision = Console.ReadLine();
-        if (decision != "yes")
+        string decision1 = Console.ReadLine();
+        if (decision1 != "yes")
         {
             return;
         }
         Agent squadLeader = new SquadLeader();
         start(squadLeader);
+        Console.WriteLine("type yes fot continue to the next agent");
+        string decision2 = Console.ReadLine();
+        if (decision2 != "yes")
+        {
+            return;
+        }
+        Agent seniorCommander = new SeniorCommander();
+        start(seniorCommander);
         
         
     }
